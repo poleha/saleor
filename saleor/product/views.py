@@ -8,7 +8,7 @@ from django.http import HttpResponsePermanentRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
-
+from django.db.models import Q
 from ..cart.utils import set_cart_cookie
 from ..core.utils import get_paginator_items, serialize_decimal
 from ..core.utils.filters import get_now_sorted_by, get_sort_by_choices
@@ -116,7 +116,8 @@ def category_index(request, path, category_id):
         return redirect('product:category', permanent=True, path=actual_path,
                         category_id=category_id)
     products = (products_with_details(user=request.user)
-                .filter(categories__id=category.id)
+                .filter(Q(categories__id__in=category.children.all()) |
+                        Q(categories__id=category.pk))
                 .order_by('name'))
     product_filter = ProductFilter(
         request.GET, queryset=products, category=category)

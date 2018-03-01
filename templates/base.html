@@ -107,6 +107,7 @@
             {% endif %}
           </div>
           <div class="col-2 col-md-4">
+         {% comment %}
             <div class="navbar__brand__cart float-right">
               <a class="cart__icon" href="{% url "cart:index" %}">
                 <span class="cart-label d-none d-md-inline-block">
@@ -127,6 +128,7 @@
                 {% include 'cart-dropdown.html' %}
               </div>
             </div>
+          {% endcomment %}
           </div>
         </div>
       </div>

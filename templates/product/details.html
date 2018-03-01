@@ -89,7 +89,9 @@
             {% trans "Edit in dashboard" context "Product details link text" %}
         </a></p>
       {% endif %}
+    {% comment %}
       {% if availability.available %}
+      {% endcomment %}
         {% if show_variant_picker %}
           <div id="variant-price-component"></div>
         {% else %}
@@ -106,7 +108,9 @@
               </small>
             {% endif %}
           </h2>
+        {% comment %}
         {% endif %}
+        {% endcomment %}
       {% endif %}
       {% if is_visible and product.is_in_stock %}
         {% block orderform %}
@@ -135,9 +139,11 @@
         </div>
 
       {% else %}
+        {% comment %}
         <p class="alert alert-warning">
           {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
         </p>
+        {% endcomment %}
       {% endif %}
       <div class="product__info__description">
         <h3>{% trans "Description" context "Product details title" %}</h3>
